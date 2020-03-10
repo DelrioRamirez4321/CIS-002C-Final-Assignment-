@@ -1,31 +1,41 @@
 let playingBoard = document.getElementById("game-board");
 let playingSquares = document.getElementsByClassName("game-square");
 let reset = document.getElementById("button-play-again");
-let players = ["X","O"];
-
-function toggleTurns(){
-    if(players[1]){
-        return players[0]
-    } else {
-        return players[1];
-    }
+let turnTracker = document.getElementById("turn");
+let currentPlayer = "X";
+function updateCurrentPlayer(){
+    turnTracker.innerText = currentPlayer;
 }
+updateCurrentPlayer();
 
-function buttonReset(){
-    for(let i = 0; i < playingSquares.length;i++){
-        if(playingSquares[i].textContent == players[0] && players[1]){
-            playingSquares[i].textContent = " ";
-        }
-    }
+function buttonReset() {
+  for (let i = 0; i < playingSquares.length; i++) {
+    playingSquares[i].textContent = "";
+    playingSquares[i].addEventListener("click", markingSquare);
+  }
+  currentPlayer = "X";
+  updateCurrentPlayer();
 }
-
-for(let i = 0; i < playingSquares.length; i++){
-    function markingSquare(){
-        playingSquares[i].textContent = toggleTurns(players[1]);
-        console.log(playingSquares[i]);
-    }
-    playingSquares[i].addEventListener('click', markingSquare)
-}
-
 
 reset.addEventListener("click", buttonReset);
+
+function toggleTurns() {
+  if (currentPlayer == "X") {
+    currentPlayer = "O";
+  } else {
+    currentPlayer = "X";
+  }
+  updateCurrentPlayer();
+}
+
+function addListenerToSquares() {
+  for (let i = 0; i < playingSquares.length; i++) {
+    playingSquares[i].addEventListener("click", markingSquare);
+  }
+}
+function markingSquare() {
+  this.innerText = currentPlayer;
+  this.removeEventListener("click", markingSquare);
+  toggleTurns();
+}
+addListenerToSquares();
