@@ -3,6 +3,13 @@ let playingSquares = document.getElementsByClassName("game-square");
 let reset = document.getElementById("button-play-again");
 let turnTracker = document.getElementById("turn");
 let currentPlayer = "X";
+let xScore = document.getElementById("scoreboard-x");
+let oScore = document.getElementById("scoreboard-o");
+
+xScore.innerHTML = 0;
+oScore.innerHTML = 0;
+
+
 function updateCurrentPlayer(){
     turnTracker.innerText = currentPlayer;
 }
@@ -42,10 +49,11 @@ function markingSquare() {
 
 function gameWins(){
   if(xWon() == true ){
-    alert("X Won");
+    alert("X Won");;
   }
   else if (oWon() == true){
-    alert("X Won");
+    alert("O Won");
+    ;
   }
 
 }
