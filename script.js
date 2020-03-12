@@ -49,11 +49,12 @@ function markingSquare() {
 
 function gameWins(){
   if(xWon() == true ){
-    alert("X Won");;
+    alert("X Won");
+    xScore.innerHTML++;
   }
   else if (oWon() == true){
     alert("O Won");
-    ;
+    oScore.innerHTML++;
   }
 
 }
